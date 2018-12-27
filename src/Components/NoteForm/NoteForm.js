@@ -17,6 +17,15 @@ class NoteForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log(this.state)
+    this.props.addNote(this.state)
+    this.setState({ 
+      note: '',
+      tag: ''
+    })
+    if (this.state.tag === '') {
+      return false
+    }
     //send note to the backend
   }
 
@@ -29,6 +38,7 @@ class NoteForm extends Component {
           placeholder='Enter note text here (max 250 characters)'
           name='note'
           value={note}
+          maxLength='250'
           onChange={this.handleChange}>
         </textarea>
         <select
@@ -36,11 +46,14 @@ class NoteForm extends Component {
           name='tag'
           value={tag}
           onChange={this.handleChange}>
+          <option>Select Tag</option>
           <option>Work</option>
           <option>Personal</option>
           <option>Hobby</option>
         </select>
-        <button>Save Note</button>
+        <button
+          disabled={this.state.note === '' || this.state.tag === '' ? true : false}
+        >Save Note</button>
       </form>
     )
   }
