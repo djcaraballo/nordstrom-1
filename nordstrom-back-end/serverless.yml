@@ -3,15 +3,15 @@ provider:
   name: aws
   runtime: nodejs8.10
 functions:
-  addNote:
-    handler: handler.addNote
+  createNote:
+    handler: handler.createNote
     events:
       - http:
           path: /create
           method: post
           cors: true
-  getNotes:
-    handler: handler.getNotes
+  listNotes:
+    handler: handler.listNotes
     events:
       - http:
           path: /
