@@ -16,13 +16,14 @@ class App extends Component {
 
   componentDidMount = async () => {
     const notes = await fetchData()
-    console.log(notes)
     this.setState({ notes })
   }
 
-  addNote = (note) => {
+  addNote = async (note) => {
+    const { notes } = this.state
     const newNote = {id: Date(), ...note}
     saveData(newNote)
+    this.setState({ notes: [newNote, ...notes] })
   }
 
   setFilter = (tag) => {
