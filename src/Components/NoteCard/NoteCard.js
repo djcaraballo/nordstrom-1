@@ -3,9 +3,9 @@ import './NoteCard.css'
 
 const NoteCard = (props) => {
   return(
-    <div>
+    <div className='note-card'>
       <p>{props.note}</p>
-      <p>{props.tag}</p>
+      <p className='card-tag'>{props.tag}</p>
     </div>
   )
 }

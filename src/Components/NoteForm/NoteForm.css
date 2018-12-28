@@ -1,0 +1,28 @@
+.note-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 10em;
+}
+
+.text-input {
+  height: 5em;
+  margin: 1em;
+}
+
+.form-select {
+  margin-bottom: 1em;
+  height: 2em;
+}
+
+.form-submit-btn {
+  margin-bottom: 1em;
+  height: 2em;
+}
+
+.form-container {
+  display: block;
+  border-bottom: 1px solid white;
+  width: 80%;
+  margin-bottom: 2em;
+}

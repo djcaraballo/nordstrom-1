@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NoteForm from '../NoteForm/NoteForm'
 import NoteContainer from '../NoteContainer/NoteContainer'
 import SearchFilter from '../SearchFilter/SearchFilter'
+import { fetchData, saveData, filterData } from '../../API' 
 import './App.css';
 
 class App extends Component {
@@ -13,21 +14,34 @@ class App extends Component {
     }
   }
 
-  addNote = (note) => {
-    const newNote = {id: Date.now(), ...note}
-    this.setState({ notes: [newNote, ...this.state.notes]})
+  componentDidMount = async () => {
+    const notes = await fetchData()
+    this.setState({ notes })
+  }
+
+  addNote = async (note) => {
+    const { notes } = this.state
+    const newNote = {id: Date(), ...note}
+    saveData(newNote)
+    this.setState({ notes: [newNote, ...notes] })
   }
 
   setFilter = (tag) => {
-    console.log('set the filter!')
     this.setState({ searchBy: tag })
     console.log('filter set!')
+  }
+
+  filterNotes = () => {
+    const tag = this.state.searchBy
+    const filteredNotes = filterData(tag)
+    return filteredNotes
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
+          <h1>Add Notes!</h1>
           <NoteForm addNote={this.addNote}/>
           <SearchFilter setFilter={this.setFilter}/>
           <NoteContainer notes={this.state.notes} />

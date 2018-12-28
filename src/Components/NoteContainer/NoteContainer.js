@@ -2,8 +2,8 @@ import React from 'react'
 import NoteCard from '../NoteCard/NoteCard'
 import './NoteContainer.css'
 
-const NoteContainer = ({ notes }) => {
-  const notecards = notes.map(note => {
+const NoteContainer = (props) => {
+  const notecards = props.notes.map(note => {
     return (
       <NoteCard 
         key={note.id}
