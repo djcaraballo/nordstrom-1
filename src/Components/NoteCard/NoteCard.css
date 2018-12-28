@@ -1,0 +1,9 @@
+.note-card {
+  border: 1px white solid;
+  margin: 1em;
+  padding: 1em;
+}
+
+.card-tag {
+  font-size: .75em;
+}

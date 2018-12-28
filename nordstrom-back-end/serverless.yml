@@ -1,0 +1,21 @@
+service: nordstrom-back-end 
+provider:
+  name: aws
+  runtime: nodejs8.10
+functions:
+  addNote:
+    handler: handler.addNote
+    events:
+      - http:
+          path: /create
+          method: post
+          cors: true
+  getNotes:
+    handler: handler.getNotes
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+
+

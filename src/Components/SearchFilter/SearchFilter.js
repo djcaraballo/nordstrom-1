@@ -6,7 +6,8 @@ class SearchFilter extends Component {
     super(props)
     this.state = {
       tag: '',
-      filter: ''
+      month: '',
+      day: ''
     }
   }
 
@@ -16,45 +17,56 @@ class SearchFilter extends Component {
     this.props.setFilter(this.state.tag)
   }
 
-  handleSubmit = () => {
-    
+  handleDateSubmit = (e) => {
+    e.preventDefault()
+    const { month, day } = this.state
   }
 
-  handleFilter = () => {
+  handleTagSubmit = (e) => {
+    e.preventDefault()
+  }
 
+  renderSearch = () => {
+    const { tag, month, day } = this.state
+    if (tag === '') {
+      return (
+        <div></div>
+      )
+    } else if (tag === 'Date') {
+      return (
+        <form onSubmit={this.handleDateSubmit}>
+          <input
+            type='number'
+            placeholder='06'
+            maxLength='2'
+            name='month'
+            value={month}
+            onChange={this.handleChange} />
+          <input
+            type='number'
+            placeholder='23'
+            maxLength='2'
+            name='day'
+            value={day}
+            onChange={this.handleChange} />
+          <button>Search Notes</button>
+        </form>
+      )
+    } else if (tag === 'Tag') {
+      return (
+        <div>
+          <select>
+            <option>Work</option>
+            <option>Personal</option>
+            <option>Hobby</option>
+          </select>
+          <button onSubmit={this.handleTagSubmit}>Search Notes</button>
+        </div>
+      )
+    }
   }
 
   render() {
-    const renderedSearch = () => {
-      const { tag } = this.state
-      if (tag === 'Date') {
-        return (
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type='number'
-              placeholder='06'
-              maxLength='2' />
-            <input
-              type='number'
-              placeholder='23'
-              maxLength='2' />
-            <button>Search Notes</button>
-          </form>
-        )
-      } else if (tag === 'Tag') {
-        return (
-          <div>
-            <select>
-              <option>Work</option>
-              <option>Personal</option>
-              <option>Hobby</option>
-            </select>
-            <button></button>
-          </div>
-        )
-      }
-    }
-
     return(
       <div>
         <select 
@@ -66,7 +78,7 @@ class SearchFilter extends Component {
           <option>Tag</option>
         </select>
         <div>
-          {renderedSearch}
+          {this.renderSearch()}
         </div>
       </div>
     )
