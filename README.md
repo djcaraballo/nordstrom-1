@@ -18,7 +18,6 @@ npm start
 - DynamoDB
 - AWS Lambda
 - Serverless.js (attempted)
-- GraphQL (attempted)
 
 ## Endpoints
 I used a single endpoint for both the `GET` and `POST` requests. The API url used was: 
