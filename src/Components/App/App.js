@@ -28,19 +28,15 @@ class App extends Component {
 
   setFilter = (tag) => {
     this.setState({ searchBy: tag })
-    console.log('filter set!')
   }
 
   filterNotes = async (dateString, sortTag) => {
     const tag = this.state.searchBy
-    console.log(dateString)
-    console.log(tag)
     let filteredNotes
     if (tag === 'Date') {
       filteredNotes = await filterByDate(dateString)
     } else if (tag === 'Tag') {
       filteredNotes = await filterByTag(sortTag)
-      console.log(filteredNotes)
     } else {
       filteredNotes = await fetchData()
     }

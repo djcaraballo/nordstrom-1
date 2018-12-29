@@ -75,6 +75,7 @@ class SearchFilter extends Component {
             onChange={this.handleChange}
             name='sortTag'
             value={sortTag}>
+            <option>Select Filter</option>
             <option>Work</option>
             <option>Personal</option>
             <option>Hobby</option>
