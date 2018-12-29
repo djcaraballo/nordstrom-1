@@ -18,10 +18,19 @@ export const saveData = async (data) => {
   })
 }
 
-export const filterData = (category) => {
-  //category will be either tag or date
-  //if the tag is date
-  //return all notes with the id that matches the date
-  //if the tag is tag
-  //return all notes with the tag that matches the tag
+export const filterByDate = async (dateString) => {
+  const notes = await fetchData()
+  const filteredNotes = notes.filter(note => {
+    const date = new Date(note.id).toISOString()
+    if (date.includes(dateString)) {
+      return true
+    }
+  })
+  return filteredNotes
+}
+
+export const filterByTag = async (tag) => {
+  const notes = await fetchData()
+  const filteredNotes = notes.filter(note => note.tag === tag)
+  return filteredNotes
 }

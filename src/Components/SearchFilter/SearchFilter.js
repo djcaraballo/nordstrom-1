@@ -7,7 +7,9 @@ class SearchFilter extends Component {
     this.state = {
       tag: '',
       month: '',
-      day: ''
+      day: '',
+      year: '',
+      sortTag: ''
     }
   }
 
@@ -19,15 +21,19 @@ class SearchFilter extends Component {
 
   handleDateSubmit = (e) => {
     e.preventDefault()
-    const { month, day } = this.state
+    const { month, day, year } = this.state
+    const dateString = `${year}-${month}-${day}`
+    this.props.filterNotes(dateString, null)
   }
 
   handleTagSubmit = (e) => {
     e.preventDefault()
+    const { sortTag } = this.state
+    this.props.filterNotes(null, sortTag)
   }
 
   renderSearch = () => {
-    const { tag, month, day } = this.state
+    const { tag, month, day, year, sortTag } = this.state
     if (tag === '') {
       return (
         <div></div>
@@ -38,16 +44,26 @@ class SearchFilter extends Component {
           <input
             type='number'
             placeholder='06'
-            maxLength='2'
+            max='12'
+            min='1'
             name='month'
             value={month}
             onChange={this.handleChange} />
           <input
             type='number'
             placeholder='23'
-            maxLength='2'
+            max='31'
+            min='1'
             name='day'
             value={day}
+            onChange={this.handleChange} />
+          <input
+            type='number'
+            placeholder='2018'
+            max='2018'
+            min='2000'
+            name='year'
+            value={year}
             onChange={this.handleChange} />
           <button>Search Notes</button>
         </form>
@@ -55,12 +71,15 @@ class SearchFilter extends Component {
     } else if (tag === 'Tag') {
       return (
         <div>
-          <select>
+          <select 
+            onChange={this.handleChange}
+            name='sortTag'
+            value={sortTag}>
             <option>Work</option>
             <option>Personal</option>
             <option>Hobby</option>
           </select>
-          <button onSubmit={this.handleTagSubmit}>Search Notes</button>
+          <button onClick={this.handleTagSubmit}>Search Notes</button>
         </div>
       )
     }
